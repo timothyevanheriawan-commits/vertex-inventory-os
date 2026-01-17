@@ -1,0 +1,36 @@
+sku,name,category,stock_level,min_stock_threshold,unit_cost,unit_price
+FUR-LR-001,Chesterfield Velvet Sofa,Living Room,4,3,450.00,1299.00
+FUR-LR-002,Industrial Coffee Table,Living Room,15,5,85.00,240.00
+FUR-LR-003,Eames Style Lounge Chair,Living Room,2,3,210.00,650.00
+FUR-LR-004,Floating Oak Media Unit,Living Room,8,4,120.00,380.00
+FUR-LR-005,Modular Sectional (5-Piece),Living Room,1,2,900.00,2800.00
+FUR-BD-001,Tufted King Bed Frame,Bedroom,3,2,350.00,1100.00
+FUR-BD-002,Memory Foam Mattress,Bedroom,12,5,200.00,899.00
+FUR-BD-003,Scandinavian Nightstand,Bedroom,24,10,45.00,125.00
+FUR-BD-004,6-Drawer Mirror Dresser,Bedroom,5,4,280.00,750.00
+FUR-BD-005,Full-Length Standing Mirror,Bedroom,18,5,55.00,199.00
+FUR-DN-001,Marble Top Dining Table,Dining,2,2,650.00,1850.00
+FUR-DN-002,Velvet Dining Chair (Set of 2),Dining,40,12,90.00,320.00
+FUR-DN-003,Rattan Sideboard Buffet,Dining,6,4,180.00,540.00
+FUR-DN-004,Bar Height Swivel Stool,Dining,28,8,40.00,115.00
+FUR-OF-001,Bamboo Standing Desk,Office,10,5,220.00,599.00
+FUR-OF-002,Ergonomic Aeron-Style Chair,Office,14,8,160.00,450.00
+FUR-OF-003,Floating Bookshelf (Walnut),Office,35,10,35.00,95.00
+FUR-OF-004,Under-Desk Filing Cabinet,Office,12,5,50.00,140.00
+FUR-OF-005,LED Architect Desk Lamp,Office,50,15,22.00,85.00
+FUR-DC-001,Hand-Blown Glass Vase,Decor,80,20,12.00,48.00
+FUR-DC-002,Abstract Gold Canvas Art,Decor,15,5,65.00,240.00
+FUR-DC-003,Scented Soy Candle (Large),Decor,200,40,4.50,22.00
+FUR-DC-004,Boho Throw Pillow (Sage),Decor,120,30,8.50,35.00
+FUR-DC-005,Wool Chunky Knit Blanket,Decor,45,10,35.00,110.00
+FUR-DC-006,Ceramic Coaster Set (6),Decor,150,25,3.00,18.00
+FUR-LT-001,Tripod Floor Lamp,Lighting,22,10,45.00,165.00
+FUR-LT-002,Modern Globe Pendant,Lighting,14,5,70.00,220.00
+FUR-LT-003,Smart Hue-Compatible Bulb,Lighting,300,50,12.00,45.00
+FUR-OD-001,Teak Patio Table,Outdoor,3,3,400.00,1200.00
+FUR-OD-002,Wicker Outdoor Armchair,Outdoor,20,8,85.00,275.00
+FUR-OD-003,Solar Pathway Lights (Set of 8),Outdoor,65,20,18.00,75.00
+FUR-OD-004,Propane Fire Pit Table,Outdoor,5,3,250.00,850.00
+FUR-OD-005,Waterproof Furniture Cover,Outdoor,100,15,15.00,60.00
+FUR-KN-001,Magnetic Knife Block,Kitchen,40,10,25.00,85.00
+FUR-KN-002,Cast Iron Skillet (12-inch),Kitchen,0,5,35.00,110.00

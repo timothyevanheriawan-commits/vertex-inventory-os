@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 
+  Vertex OS | Industrial Global Styles 
+  Tailwind v4 compatible 
+*/
+
+html {
+    scroll-behavior: smooth;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+    body {
+        /* Standardizing on the Slate-50 / Slate-900 high-contrast pair */
+        @apply antialiased bg-slate-50 text-slate-900;
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+
+    /* Refined Typography (Cockpit Standard) */
+    h1 {
+        @apply text-2xl font-black tracking-tight text-slate-900 uppercase;
+    }
+    h2 {
+        @apply text-lg font-bold tracking-tight text-slate-900;
+    }
+    h3 {
+        @apply text-base font-bold text-slate-900 tracking-tight;
+    }
+
+    /* Better focus states globally */
+    *:focus-visible {
+        @apply outline-none ring-2 ring-indigo-500/20 ring-offset-2;
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@layer components {
+    /* ===== STATUS BADGES ===== */
+    .badge {
+        @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-black border uppercase tracking-widest;
+    }
+
+    .badge-success { @apply bg-emerald-50 text-emerald-700 border-emerald-200; }
+    .badge-warning { @apply bg-amber-50 text-amber-700 border-amber-200; }
+    .badge-error { @apply bg-rose-50 text-rose-700 border-rose-200; }
+
+    /* ===== FORM INPUTS ===== */
+    .input {
+        @apply w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-200 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/10;
+    }
+
+    /* ===== COMMAND PALETTE STYLES ===== */
+    .palette-item {
+        @apply flex items-center px-3 py-2.5 rounded-lg cursor-pointer transition-all duration-100 outline-none;
+    }
+
+    /* FIX: Using the '!' prefix instead of '!important' utility */
+    .palette-item[data-selected='true'] {
+        @apply bg-indigo-600 !text-white shadow-lg shadow-indigo-200;
+    }
+
+    .palette-item[data-selected='true'] span,
+    .palette-item[data-selected='true'] div,
+    .palette-item[data-selected='true'] svg {
+        @apply !text-white;
+    }
+
+    [cmdk-group-heading] {
+        @apply px-3 py-2 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400;
+    }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+    /* Custom scrollbar for an industrial feel */
+    .scrollbar-industrial {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-slate-300) transparent;
+    }
+
+    .scrollbar-industrial::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .scrollbar-industrial::-webkit-scrollbar-thumb {
+        @apply bg-slate-300 rounded-full;
+    }
 }
