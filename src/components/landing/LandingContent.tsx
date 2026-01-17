@@ -25,14 +25,15 @@ import {
     RefreshCw,
     Lock,
     Layers,
-    Play
 } from 'lucide-react'
 import Logo from '@/components/Logo'
+import { Variants } from 'framer-motion' // Add this import
 
 // ============================================
 // ANIMATION VARIANTS
 // ============================================
-const fadeInUp = {
+// Animation Variants with explicit Typing
+const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,
@@ -41,7 +42,7 @@ const fadeInUp = {
     }
 }
 
-const staggerContainer = {
+const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -52,7 +53,7 @@ const staggerContainer = {
     }
 }
 
-const scaleIn = {
+const scaleIn: Variants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: {
         opacity: 1,
