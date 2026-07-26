@@ -51,20 +51,20 @@ export default function UpdateStockModal({
                     <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl border border-slate-200">
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-lg font-bold text-slate-900">Adjust Inventory</h2>
-                            <button title="-" onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-slate-600">
+                            <button aria-label="Close" onClick={() => setIsOpen(false)} className="text-slate-500 hover:text-slate-600">
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
 
-                        <p className="text-[10px] font-black text-slate-400 mb-6 uppercase tracking-widest">
+                        <p className="text-[10px] font-black text-slate-500 mb-6 uppercase tracking-widest">
                             {productName}
                         </p>
 
                         <div className="space-y-4">
                             <div className="space-y-1.5">
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">New Quantity On Hand</label>
+                                <label htmlFor="update-stock-quantity" className="text-[10px] font-black text-slate-500 uppercase tracking-widest">New Quantity On Hand</label>
                                 <input
-                                    title="-"
+                                    id="update-stock-quantity"
                                     type="number"
                                     // FIX 2: If value is NaN (user cleared input), show empty string instead of NaN
                                     value={isNaN(value) ? '' : value}

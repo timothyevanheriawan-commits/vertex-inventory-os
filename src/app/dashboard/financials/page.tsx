@@ -1,4 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
+import { getVerifiedUser } from '@/utils/supabase/verified-user'
 import {
     DollarSign,
     PieChart,
@@ -17,9 +19,13 @@ import { Tooltip, TooltipProvider } from '@/components/ui/Tooltip'
 export default async function FinancialsPage() {
     const supabase = await createClient()
 
+    const user = await getVerifiedUser()
+    if (!user) redirect('/login')
+
     const { data: items } = await supabase
         .from('inventory_insights')
         .select('*')
+        .eq('user_id', user.id)
         .order('inventory_value', { ascending: false })
 
     const financials = items || []
@@ -45,7 +51,7 @@ export default async function FinancialsPage() {
                     {/* BREADCRUMB + HEADER */}
                     <div className="space-y-3">
                         <nav className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest">
-                            <Link href="/dashboard" className="text-slate-400 hover:text-indigo-600 transition-colors">Dashboard</Link>
+                            <Link href="/dashboard" className="text-slate-500 hover:text-indigo-600 transition-colors">Dashboard</Link>
                             <ChevronRight className="h-3 w-3 text-slate-300" />
                             <span className="text-slate-600">Financials</span>
                         </nav>
@@ -59,7 +65,7 @@ export default async function FinancialsPage() {
                                     <h1 className="text-xl font-bold tracking-tight text-slate-900">
                                         Capital Allocation
                                     </h1>
-                                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                                         {financials.length} POSITIONS • PROFITABILITY & ASSET EXPOSURE
                                     </p>
                                 </div>
@@ -101,7 +107,7 @@ export default async function FinancialsPage() {
                 {/* Asset Table */}
                 <div className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
                     <div className="px-5 py-3 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
-                        <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
+                        <h2 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
                             <Activity className="h-3.5 w-3.5 text-indigo-500" />
                             Asset Concentration
                         </h2>
@@ -115,14 +121,14 @@ export default async function FinancialsPage() {
                                     <th className="px-6 py-2.5 font-bold text-[10px] uppercase tracking-widest text-right">
                                         <Tooltip content="Price paid to supplier per unit. Basis for capital calculation.">
                                             <div className="flex items-center justify-end gap-1 cursor-help group">
-                                                Unit Cost <Info className="h-2.5 w-2.5 text-slate-300 group-hover:text-indigo-500 transition-colors" />
+                                                Unit Cost <Info className="h-2.5 w-2.5 text-slate-500 group-hover:text-indigo-500 transition-colors" />
                                             </div>
                                         </Tooltip>
                                     </th>
                                     <th className="px-6 py-2.5 font-bold text-[10px] uppercase tracking-widest text-right">
                                         <Tooltip content="Total capital currently tied up in this SKU (Stock × Cost).">
                                             <div className="flex items-center justify-end gap-1 cursor-help group">
-                                                Position Value <Info className="h-2.5 w-2.5 text-slate-300 group-hover:text-indigo-500 transition-colors" />
+                                                Position Value <Info className="h-2.5 w-2.5 text-slate-500 group-hover:text-indigo-500 transition-colors" />
                                             </div>
                                         </Tooltip>
                                     </th>
@@ -145,7 +151,7 @@ export default async function FinancialsPage() {
                                                     <span className="font-bold text-slate-900 text-[13px] group-hover:text-indigo-600 transition-colors">
                                                         {item.name}
                                                     </span>
-                                                    <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-tighter leading-none mt-0.5">
+                                                    <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-tighter leading-none mt-0.5">
                                                         {item.sku}
                                                     </span>
                                                 </Link>
@@ -178,7 +184,7 @@ export default async function FinancialsPage() {
                                             <td className="px-6 py-2 text-right align-middle">
                                                 <Link
                                                     href={`/dashboard/inventory/${item.product_id}`}
-                                                    className="opacity-0 group-hover:opacity-100 bg-indigo-600 text-white text-[9px] font-black uppercase px-2.5 py-1 rounded shadow-sm hover:bg-indigo-700 transition-all"
+                                                    className="opacity-0 group-hover:opacity-100 bg-indigo-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow-sm hover:bg-indigo-700 transition-all"
                                                 >
                                                     Audit
                                                 </Link>

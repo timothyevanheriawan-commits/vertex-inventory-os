@@ -75,7 +75,7 @@ export default function DemandSimulator({
                         className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-indigo-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     />
 
-                    <div className="flex justify-between text-[11px] text-slate-400 mt-2 font-mono">
+                    <div className="flex justify-between text-[11px] text-slate-500 mt-2 font-mono">
                         <span>-50% Cooling</span>
                         <span>Baseline</span>
                         <span>+100% Surge</span>
@@ -92,7 +92,7 @@ export default function DemandSimulator({
                             </p>
                             <p className="text-2xl font-mono font-bold tracking-tight text-slate-900">
                                 {simulatedBurn.toFixed(1)}
-                                <span className="text-sm text-slate-400 font-sans font-normal ml-1">
+                                <span className="text-sm text-slate-500 font-sans font-normal ml-1">
                                     /day
                                 </span>
                             </p>
@@ -105,7 +105,7 @@ export default function DemandSimulator({
                             </p>
                             <p className="text-2xl font-mono font-bold tracking-tight text-slate-900">
                                 {displayDays}
-                                <span className="text-sm text-slate-400 font-sans font-normal ml-1">
+                                <span className="text-sm text-slate-500 font-sans font-normal ml-1">
                                     Days
                                 </span>
                             </p>

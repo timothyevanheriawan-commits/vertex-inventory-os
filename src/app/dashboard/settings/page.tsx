@@ -2,12 +2,13 @@ import { createClient } from '@/utils/supabase/server'
 import { User, Bell, Database, Shield, Mail, Copy, Cpu, CheckCircle2, ChevronRight, Settings2 } from 'lucide-react'
 import DataActions from '@/components/settings/DataActions'
 import { redirect } from 'next/navigation'
+import { getVerifiedUser } from '@/utils/supabase/verified-user'
 import SettingsForm from '@/components/settings/SettingsForm'
 import Link from 'next/link'
 
 export default async function SettingsPage() {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
+    const user = await getVerifiedUser()
     if (!user) redirect('/login')
 
     const { data: settings } = await supabase
@@ -16,7 +17,10 @@ export default async function SettingsPage() {
         .eq('user_id', user.id)
         .single()
 
-    const { data: products } = await supabase.from('inventory_insights').select('*')
+    const { data: products } = await supabase
+        .from('inventory_insights')
+        .select('*')
+        .eq('user_id', user.id)
 
     const maskedId = `${user.id.substring(0, 8)}...${user.id.substring(user.id.length - 4)}`
 
@@ -25,7 +29,7 @@ export default async function SettingsPage() {
             {/* Header */}
             <div className="space-y-3">
                 <nav className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest">
-                    <Link href="/dashboard" className="text-slate-400 hover:text-indigo-600 transition-colors">Dashboard</Link>
+                    <Link href="/dashboard" className="text-slate-500 hover:text-indigo-600 transition-colors">Dashboard</Link>
                     <ChevronRight className="h-3 w-3 text-slate-300" />
                     <span className="text-slate-600">Settings</span>
                 </nav>
@@ -39,7 +43,7 @@ export default async function SettingsPage() {
                             <h1 className="text-xl font-bold tracking-tight text-slate-900">
                                 Control Tower
                             </h1>
-                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                                 SYSTEM PREFERENCES • DATA GOVERNANCE
                             </p>
                         </div>
@@ -56,23 +60,23 @@ export default async function SettingsPage() {
                 </div>
                 <div className="p-5 grid gap-4 md:grid-cols-2">
                     <div className="space-y-1.5">
-                        <label className="text-[9px] font-black uppercase tracking-[0.15em] text-slate-400">
+                        <label className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-500">
                             Auth Email
                         </label>
                         <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5">
-                            <Mail className="h-4 w-4 text-slate-400" />
+                            <Mail className="h-4 w-4 text-slate-500" />
                             <span className="text-sm font-bold text-slate-700">{user.email}</span>
                         </div>
                     </div>
                     <div className="space-y-1.5">
-                        <label className="text-[9px] font-black uppercase tracking-[0.15em] text-slate-400">
+                        <label className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-500">
                             System UUID
                         </label>
                         <div className="group flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5">
                             <span className="text-xs font-mono font-bold text-slate-500 tabular-nums">{maskedId}</span>
                             <button
                                 title="Copy ID"
-                                className="text-slate-400 hover:text-indigo-600 transition-colors"
+                                className="text-slate-500 hover:text-indigo-600 transition-colors"
                             >
                                 <Copy className="h-4 w-4" />
                             </button>
@@ -90,7 +94,7 @@ export default async function SettingsPage() {
                             Intelligence Engine
                         </h2>
                     </div>
-                    <span className="inline-flex items-center gap-1 text-[9px] font-black bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md border border-emerald-200 uppercase tracking-wide">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-black bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md border border-emerald-200 uppercase tracking-wide">
                         <CheckCircle2 className="h-3 w-3" />
                         Active
                     </span>
@@ -122,7 +126,7 @@ export default async function SettingsPage() {
                                 <p className="text-[10px] text-slate-500 mt-0.5">{alert.desc}</p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <span className="text-[9px] font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100 uppercase tracking-wide">
+                                <span className="text-[10px] font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100 uppercase tracking-wide">
                                     {alert.channel}
                                 </span>
                                 <button
@@ -153,7 +157,7 @@ export default async function SettingsPage() {
             </section>
 
             {/* Footer */}
-            <footer className="flex items-center justify-center gap-2 text-[9px] font-black text-slate-400 uppercase tracking-[0.15em] pt-4">
+            <footer className="flex items-center justify-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.15em] pt-4">
                 <Shield className="h-3 w-3" />
                 Secure Connection • Vertex OS v2.4
             </footer>

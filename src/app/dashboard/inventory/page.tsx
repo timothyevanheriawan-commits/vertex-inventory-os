@@ -1,8 +1,11 @@
 import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
+import { getVerifiedUser } from '@/utils/supabase/verified-user'
 import AddProductModal from '@/components/inventory/AddProductModal'
 import ProductTable from '@/components/inventory/ProductTable'
 import { Package, AlertTriangle, CheckCircle, ChevronRight, FileUp } from 'lucide-react'
 import Link from 'next/link'
+import { escapePostgrestFilterValue } from '@/app/lib/utils'
 
 export default async function InventoryPage({
     searchParams,
@@ -12,14 +15,23 @@ export default async function InventoryPage({
     const { q, category } = await searchParams
     const supabase = await createClient()
 
-    let query = supabase.from('products').select('*')
-    if (q) query = query.or(`name.ilike.%${q}%,sku.ilike.%${q}%`)
+    const user = await getVerifiedUser()
+    if (!user) redirect('/login')
+
+    let query = supabase.from('products').select('*').eq('user_id', user.id)
+    if (q) {
+        const safeQ = escapePostgrestFilterValue(q)
+        query = query.or(`name.ilike.%${safeQ}%,sku.ilike.%${safeQ}%`)
+    }
     if (category && category !== 'All') query = query.eq('category', category)
 
     const { data: products } = await query.order('name', { ascending: true })
     const productList = products || []
 
-    const { data: categories } = await supabase.from('products').select('category')
+    const { data: categories } = await supabase
+        .from('products')
+        .select('category')
+        .eq('user_id', user.id)
     const uniqueCategories = Array.from(new Set(categories?.map(c => c.category).filter(Boolean)))
 
     // Quick Stats
@@ -34,7 +46,7 @@ export default async function InventoryPage({
             <div className="space-y-3">
                 {/* BREADCRUMB */}
                 <nav className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest">
-                    <Link href="/dashboard" className="text-slate-400 hover:text-indigo-600 transition-colors">
+                    <Link href="/dashboard" className="text-slate-500 hover:text-indigo-600 transition-colors">
                         Dashboard
                     </Link>
                     <ChevronRight className="h-3 w-3 text-slate-300" />
@@ -51,7 +63,7 @@ export default async function InventoryPage({
                             <h1 className="text-xl font-bold tracking-tight text-slate-900">
                                 Inventory Management
                             </h1>
-                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                                 {totalProducts} Products
                             </p>
                         </div>
@@ -81,17 +93,17 @@ export default async function InventoryPage({
                         <CheckCircle className="h-4 w-4 text-emerald-600" />
                     </div>
                     <div>
-                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Healthy</p>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Healthy</p>
                         <p className="text-lg font-mono font-bold text-slate-900 tabular-nums">{healthyCount}</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200 bg-white shadow-sm">
                     <div className="p-2 rounded-lg bg-amber-50">
-                        <AlertTriangle className="h-4 w-4 text-amber-600" />
+                        <AlertTriangle className="h-4 w-4 text-amber-700" />
                     </div>
                     <div>
-                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Low Stock</p>
-                        <p className="text-lg font-mono font-bold text-amber-600 tabular-nums">{lowStockCount}</p>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Low Stock</p>
+                        <p className="text-lg font-mono font-bold text-amber-700 tabular-nums">{lowStockCount}</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200 bg-white shadow-sm">
@@ -99,7 +111,7 @@ export default async function InventoryPage({
                         <AlertTriangle className="h-4 w-4 text-rose-600" />
                     </div>
                     <div>
-                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Out of Stock</p>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Out of Stock</p>
                         <p className="text-lg font-mono font-bold text-rose-600 tabular-nums">{outOfStockCount}</p>
                     </div>
                 </div>

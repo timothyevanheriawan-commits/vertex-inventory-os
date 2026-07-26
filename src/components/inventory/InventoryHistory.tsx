@@ -14,7 +14,7 @@ export default function InventoryHistory({ logs }: { logs: LogEntry[] }) {
     if (!logs || logs.length === 0) {
         return (
             <div className="rounded-xl border border-slate-200 bg-white p-8 text-center">
-                <p className="text-sm text-slate-400 font-bold uppercase tracking-widest">No activity history found</p>
+                <p className="text-sm text-slate-500 font-bold uppercase tracking-widest">No activity history found</p>
             </div>
         )
     }
@@ -26,7 +26,7 @@ export default function InventoryHistory({ logs }: { logs: LogEntry[] }) {
                     <History className="h-3 w-3" />
                     Audit Trail
                 </h3>
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Last 60 Days</span>
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Last 60 Days</span>
             </div>
 
             <div className="divide-y divide-slate-100">
@@ -47,7 +47,7 @@ export default function InventoryHistory({ logs }: { logs: LogEntry[] }) {
                                     <p className="text-xs font-black text-slate-900 uppercase tracking-tight">
                                         {log.change_type}
                                     </p>
-                                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">
                                         {new Date(log.created_at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}
                                     </p>
                                 </div>
@@ -60,7 +60,7 @@ export default function InventoryHistory({ logs }: { logs: LogEntry[] }) {
                                 )}>
                                     {isPositive ? '+' : ''}{log.change_amount}
                                 </p>
-                                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
+                                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
                                     Result: {log.new_stock} units
                                 </p>
                             </div>

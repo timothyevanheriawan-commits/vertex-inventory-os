@@ -6,7 +6,7 @@ export default function ImportPage() {
     return (
         <div className="space-y-8 max-w-5xl mx-auto">
             <nav className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest">
-                <Link href="/dashboard/inventory" className="text-slate-400 hover:text-indigo-600">Inventory</Link>
+                <Link href="/dashboard/inventory" className="text-slate-500 hover:text-indigo-600">Inventory</Link>
                 <ChevronRight className="h-3 w-3 text-slate-300" />
                 <span className="text-slate-600">Bulk Import</span>
             </nav>

@@ -3,7 +3,26 @@
 import { useState } from 'react';
 import { Download, AlertOctagon, Loader2, CheckCircle2, FileDown, Trash2 } from 'lucide-react';
 
-export default function DataActions({ products }: { products: any[] }) {
+interface ExportableProduct {
+    sku: string;
+    name: string;
+    category: string | null;
+    stock_level: number;
+    min_stock_threshold: number;
+    status?: string;
+}
+
+// Prevents CSV/Formula Injection: if a cell value starts with =, +, -, or @,
+// spreadsheet apps (Excel, Sheets) may interpret it as a formula when the
+// file is opened. Prefixing with a single quote neutralizes that.
+function toSafeCsvCell(value: string | number): string {
+    const str = String(value ?? '');
+    const escaped = str.replace(/"/g, '""');
+    const neutralized = /^[=+\-@]/.test(escaped) ? `'${escaped}` : escaped;
+    return `"${neutralized}"`;
+}
+
+export default function DataActions({ products }: { products: ExportableProduct[] }) {
     const [isExporting, setIsExporting] = useState(false);
     const [exportSuccess, setExportSuccess] = useState(false);
 
@@ -15,12 +34,12 @@ export default function DataActions({ products }: { products: any[] }) {
 
         const headers = ['SKU', 'Product', 'Category', 'Stock', 'Threshold', 'Status'];
         const rows = products.map(p => [
-            p.sku,
-            `"${p.name}"`,
-            p.category || 'Uncategorized',
-            p.stock_level,
-            p.min_stock_threshold,
-            p.status
+            toSafeCsvCell(p.sku),
+            toSafeCsvCell(p.name),
+            toSafeCsvCell(p.category || 'Uncategorized'),
+            toSafeCsvCell(p.stock_level),
+            toSafeCsvCell(p.min_stock_threshold),
+            toSafeCsvCell(p.status ?? ''),
         ]);
 
         const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
@@ -65,7 +84,7 @@ export default function DataActions({ products }: { products: any[] }) {
                     </span>
                 )}
 
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wide">
                     {products.length} Records
                 </span>
             </div>
@@ -87,16 +106,12 @@ export default function DataActions({ products }: { products: any[] }) {
                 </p>
 
                 <button
-                    onClick={() => {
-                        const confirmed = prompt("Type 'DELETE' to confirm account reset:");
-                        if (confirmed === 'DELETE') {
-                            alert('Account reset initiated. (Demo only)');
-                        }
-                    }}
-                    className="inline-flex items-center gap-2 rounded-lg border border-rose-200 bg-white px-4 py-2 text-xs font-bold text-rose-600 uppercase tracking-wide hover:bg-rose-600 hover:text-white hover:border-rose-600 transition-all shadow-sm focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
+                    disabled
+                    title="Not yet implemented — contact support to request account deletion"
+                    className="inline-flex items-center gap-2 rounded-lg border border-rose-200 bg-white px-4 py-2 text-xs font-bold text-rose-300 uppercase tracking-wide cursor-not-allowed opacity-60 shadow-sm"
                 >
                     <Trash2 className="h-3.5 w-3.5" />
-                    Reset All Data
+                    Reset All Data (Coming Soon)
                 </button>
             </div>
         </div>

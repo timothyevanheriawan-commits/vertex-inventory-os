@@ -43,7 +43,7 @@ export default function AddProductModal() {
                         <div className="flex items-center justify-between mb-8">
                             <h2 className="text-xl font-bold text-slate-900">New Product Entry</h2>
                             <button title="-"
-                                onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-slate-600">
+                                onClick={() => setIsOpen(false)} className="text-slate-500 hover:text-slate-600">
                                 <X className="h-5 w-5" />
                             </button>
                         </div>

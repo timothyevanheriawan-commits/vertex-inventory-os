@@ -7,6 +7,7 @@ import { cn } from '@/app/lib/utils'
 import Link from 'next/link'
 import { SearchX } from 'lucide-react'
 import { EmptyState } from '@/components/ui/EmptyState'
+import { toast } from 'sonner'
 
 // 1. DEFINE THE INTERFACE (Replacing 'any')
 interface Product {
@@ -42,22 +43,38 @@ export default function ProductTable({
         router.replace(`${pathname}?${params.toString()}`);
     };
 
+    const handleDelete = async (productId: string, productName: string) => {
+        const confirmed = confirm(
+            `Delete "${productName}"? This permanently removes the product and cannot be undone.`
+        );
+        if (!confirmed) return;
+
+        const res = await deleteProduct(productId);
+        if (res?.success) {
+            toast.success('Product deleted');
+            router.refresh();
+        } else {
+            toast.error('Delete failed', { description: res?.error });
+        }
+    };
+
     return (
         <div className="space-y-4 font-sans">
             {/* 1. FUNCTIONAL CONTROLS: Search & Filter */}
             <div className="flex flex-col sm:flex-row gap-3 items-center">
                 <div className="relative flex-1 w-full text-slate-900">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
                     <input
                         type="text"
                         placeholder="Search SKU or Product Name..."
                         defaultValue={searchParams.get('q') || ''}
                         onChange={(e) => handleSearch(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2.5 text-sm rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium placeholder:text-slate-400"
+                        className="w-full pl-10 pr-4 py-2.5 text-sm rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium placeholder:text-slate-500"
                     />
                 </div>
                 <select
                     title="Filter by Category"
+                    aria-label="Filter by category"
                     onChange={(e) => handleCategoryChange(e.target.value)}
                     defaultValue={searchParams.get('category') || 'All'}
                     className="w-full sm:w-48 px-3 py-2.5 text-sm font-bold rounded-lg border border-slate-200 bg-white text-slate-600 outline-none focus:ring-2 focus:ring-indigo-500/10 hover:border-slate-300 transition-colors cursor-pointer"
@@ -72,10 +89,10 @@ export default function ProductTable({
                 <table className="w-full text-left text-sm border-collapse">
                     <thead className="bg-slate-50 border-b border-slate-200">
                         <tr>
-                            <th className="px-5 py-3 font-black text-[10px] text-slate-400 uppercase tracking-widest leading-none">Product Identity</th>
-                            <th className="px-5 py-3 font-black text-[10px] text-slate-400 uppercase tracking-widest leading-none">Category</th>
-                            <th className="px-5 py-3 font-black text-[10px] text-slate-400 uppercase tracking-widest leading-none text-right">Inventory Level</th>
-                            <th className="px-5 py-3 font-black text-[10px] text-slate-400 uppercase tracking-widest leading-none">Operational Status</th>
+                            <th className="px-5 py-3 font-black text-[10px] text-slate-500 uppercase tracking-widest leading-none">Product Identity</th>
+                            <th className="px-5 py-3 font-black text-[10px] text-slate-500 uppercase tracking-widest leading-none">Category</th>
+                            <th className="px-5 py-3 font-black text-[10px] text-slate-500 uppercase tracking-widest leading-none text-right">Inventory Level</th>
+                            <th className="px-5 py-3 font-black text-[10px] text-slate-500 uppercase tracking-widest leading-none">Operational Status</th>
                             <th className="px-5 py-3 w-12"></th>
                         </tr>
                     </thead>
@@ -94,7 +111,7 @@ export default function ProductTable({
                                             >
                                                 {product.name}
                                             </Link>
-                                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-tight">
+                                            <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-tight">
                                                 {product.sku}
                                             </span>
                                         </div>
@@ -110,11 +127,11 @@ export default function ProductTable({
                                         <div className="flex flex-col items-end gap-0.5">
                                             <div className={cn(
                                                 "font-mono font-black text-sm tabular-nums",
-                                                isOut ? "text-rose-600" : isLow ? "text-amber-600" : "text-slate-900"
+                                                isOut ? "text-rose-600" : isLow ? "text-amber-700" : "text-slate-900"
                                             )}>
                                                 {product.stock_level.toLocaleString()}
                                             </div>
-                                            <div className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
+                                            <div className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
                                                 Target: {product.min_stock_threshold}
                                             </div>
                                         </div>
@@ -136,9 +153,10 @@ export default function ProductTable({
 
                                     <td className="px-5 py-2.5 text-right">
                                         <button
-                                            onClick={() => deleteProduct(product.id)}
-                                            className="opacity-0 group-hover:opacity-100 p-2 rounded-lg text-slate-300 hover:text-rose-600 hover:bg-rose-50 transition-all focus:opacity-100"
+                                            onClick={() => handleDelete(product.id, product.name)}
+                                            className="opacity-0 group-hover:opacity-100 p-2 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-all focus:opacity-100"
                                             title="Delete Product"
+                                            aria-label={`Delete ${product.name}`}
                                         >
                                             <Trash2 className="h-4 w-4" />
                                         </button>

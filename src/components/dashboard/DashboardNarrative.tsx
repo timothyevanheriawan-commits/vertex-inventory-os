@@ -44,7 +44,7 @@ export default function DashboardNarrative({ items }: { items: InsightItem[] }) 
         subheadline = `${watchItems.length} item${watchItems.length !== 1 ? 's are' : ' is'} approaching reorder points.`;
         Icon = Clock;
         containerStyles = "bg-amber-50 border-amber-200";
-        iconStyles = "bg-amber-100 text-amber-600";
+        iconStyles = "bg-amber-100 text-amber-700";
         headlineStyles = "text-amber-900";
         textStyles = "text-amber-700";
     }

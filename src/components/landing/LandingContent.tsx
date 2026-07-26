@@ -79,7 +79,7 @@ function Navbar() {
                             <span className="font-bold text-base tracking-tight text-slate-900 leading-none">
                                 Vertex
                             </span>
-                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none">
                                 Inventory OS
                             </span>
                         </div>
@@ -266,7 +266,7 @@ function HeroSection() {
                                 </div>
                                 <div className="flex-1 mx-4">
                                     <div className="h-5 w-40 mx-auto rounded bg-slate-100 flex items-center justify-center">
-                                        <span className="text-[9px] text-slate-400 font-mono">vertex.app/dashboard</span>
+                                        <span className="text-[10px] text-slate-500 font-mono">vertex.app/dashboard</span>
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +282,7 @@ function HeroSection() {
                                     ].map((stat, i) => (
                                         <div key={i} className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
                                             <div className="flex items-center justify-between mb-1">
-                                                <p className="text-[9px] text-slate-500 uppercase tracking-widest font-bold">{stat.label}</p>
+                                                <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">{stat.label}</p>
                                                 <stat.icon className={`h-3.5 w-3.5 ${stat.iconColor}`} />
                                             </div>
                                             <p className={`text-xl font-mono font-bold ${stat.color}`}>{stat.value}</p>
@@ -294,7 +294,7 @@ function HeroSection() {
                                 <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
                                     <div className="flex items-center justify-between mb-3">
                                         <span className="text-[10px] font-bold text-slate-700 uppercase tracking-widest">14-Day Demand</span>
-                                        <span className="text-[9px] text-slate-400 font-mono">Live</span>
+                                        <span className="text-[10px] text-slate-500 font-mono">Live</span>
                                     </div>
                                     <div className="flex items-end gap-1 h-16">
                                         {[40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 70, 95, 80, 100].map((h, i) => (
@@ -310,13 +310,13 @@ function HeroSection() {
                                 {/* Alert */}
                                 <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 flex items-center gap-3">
                                     <div className="rounded-lg bg-amber-100 p-1.5">
-                                        <AlertTriangle className="h-3.5 w-3.5 text-amber-600" />
+                                        <AlertTriangle className="h-3.5 w-3.5 text-amber-700" />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className="text-xs font-bold text-amber-900">Widget Pro Max</p>
                                         <p className="text-[10px] text-amber-700">Stockout in 5 days</p>
                                     </div>
-                                    <span className="text-[9px] font-bold text-amber-700 bg-amber-100 px-2 py-1 rounded-full border border-amber-200 uppercase tracking-wide">
+                                    <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-1 rounded-full border border-amber-200 uppercase tracking-wide">
                                         Restock
                                     </span>
                                 </div>
@@ -334,7 +334,7 @@ function HeroSection() {
                                     <TrendingUp className="h-3.5 w-3.5 text-emerald-600" />
                                 </div>
                                 <div>
-                                    <p className="text-[9px] text-slate-500 font-medium">Revenue Impact</p>
+                                    <p className="text-[10px] text-slate-500 font-medium">Revenue Impact</p>
                                     <p className="text-xs font-mono font-bold text-emerald-600">+$12,450</p>
                                 </div>
                             </div>
@@ -350,7 +350,7 @@ function HeroSection() {
                                     <Brain className="h-3.5 w-3.5 text-indigo-600" />
                                 </div>
                                 <div>
-                                    <p className="text-[9px] text-slate-500 font-medium">Smart Insight</p>
+                                    <p className="text-[10px] text-slate-500 font-medium">Smart Insight</p>
                                     <p className="text-xs font-medium text-slate-700">3 actions ready</p>
                                 </div>
                             </div>
@@ -377,7 +377,7 @@ function ProblemSolutionSection() {
             icon: Package,
             title: 'Stop Overstocking',
             description: 'Identify "Dead Stock" instantly and optimize warehouse space for items that actually move.',
-            color: 'bg-amber-50 text-amber-600 border-amber-100'
+            color: 'bg-amber-50 text-amber-700 border-amber-100'
         },
         {
             icon: RefreshCw,
@@ -462,7 +462,7 @@ function FeaturesSection() {
             icon: AlertTriangle,
             title: 'Dead Stock Detection',
             description: 'Identify capital traps before they hurt cash flow. Turn slow movers into smart decisions.',
-            color: 'bg-amber-50 text-amber-600'
+            color: 'bg-amber-50 text-amber-700'
         },
         {
             icon: TrendingUp,
@@ -609,7 +609,7 @@ function HowItWorksSection() {
                                 whileHover={{ scale: 1.05, y: -5 }}
                                 className="h-20 w-20 rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center relative shadow-sm group-hover:border-indigo-500 group-hover:shadow-xl group-hover:shadow-indigo-500/10 transition-all duration-300"
                             >
-                                <item.icon className="h-8 w-8 text-slate-400 group-hover:text-indigo-600 transition-colors duration-300" />
+                                <item.icon className="h-8 w-8 text-slate-500 group-hover:text-indigo-600 transition-colors duration-300" />
 
                                 {/* Step Badge */}
                                 <span className="absolute -top-3 -right-3 h-8 w-8 rounded-lg bg-indigo-600 text-white font-mono font-bold flex items-center justify-center text-xs shadow-lg shadow-indigo-200 group-hover:rotate-12 transition-transform">
@@ -923,7 +923,7 @@ function Footer() {
                     {/* Links */}
                     {Object.entries(footerLinks).map(([category, links]) => (
                         <div key={category}>
-                            <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">
+                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">
                                 {category}
                             </h4>
                             <ul className="space-y-2">
@@ -941,7 +941,7 @@ function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="mt-10 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-slate-400">
                         © {new Date().getFullYear()} Vertex OS. Built for efficiency.
                     </p>
                     <div className="flex items-center gap-4">
@@ -949,7 +949,7 @@ function Footer() {
                             <Link
                                 key={social}
                                 href="#"
-                                className="text-slate-500 hover:text-white transition-colors duration-200"
+                                className="text-slate-400 hover:text-white transition-colors duration-200"
                             >
                                 <span className="sr-only">{social}</span>
                                 <div className="h-8 w-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-slate-700 transition-colors">

@@ -41,7 +41,7 @@ export default function SalesChart({
             <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
                 <div className="flex flex-col items-center justify-center text-center py-8">
                     <div className="rounded-full bg-slate-100 p-3 mb-3 border border-slate-200">
-                        <BarChart3 className="h-6 w-6 text-slate-400" />
+                        <BarChart3 className="h-6 w-6 text-slate-500" />
                     </div>
                     <p className="text-sm font-bold text-slate-900">Insufficient Data</p>
                     <p className="text-[11px] text-slate-500 mt-1 max-w-50">
@@ -73,7 +73,7 @@ export default function SalesChart({
                 </div>
 
                 {/* Legend */}
-                <div className="flex flex-wrap gap-4 text-[9px] font-bold uppercase tracking-widest">
+                <div className="flex flex-wrap gap-4 text-[10px] font-bold uppercase tracking-widest">
                     <div className="flex items-center gap-1.5">
                         <div className="h-2.5 w-2.5 rounded-sm bg-indigo-600"></div>
                         <span className="text-slate-500">Actuals</span>

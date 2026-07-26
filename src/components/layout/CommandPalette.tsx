@@ -60,10 +60,10 @@ export default function CommandPalette() {
         >
             <div className="w-full max-w-xl rounded-xl border border-slate-200 bg-white shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
                 <div className="flex items-center border-b border-slate-100 px-4">
-                    <Search className="h-4 w-4 text-slate-400 mr-3" />
+                    <Search className="h-4 w-4 text-slate-500 mr-3" />
                     <Command.Input
                         placeholder="Search products, SKUs, or pages..."
-                        className="w-full py-4 text-sm outline-none placeholder:text-slate-400 text-slate-900 font-medium"
+                        className="w-full py-4 text-sm outline-none placeholder:text-slate-500 text-slate-900 font-medium"
                     />
                     <kbd className="hidden sm:inline-flex h-5 items-center gap-1 rounded border border-slate-200 bg-slate-50 px-1.5 font-mono text-[10px] font-medium text-slate-500 opacity-100">
                         <span className="text-xs">ESC</span>
@@ -76,23 +76,23 @@ export default function CommandPalette() {
                     </Command.Empty>
 
                     {/* QUICK NAVIGATION */}
-                    <Command.Group heading="Navigation" className="px-2 mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    <Command.Group heading="Navigation" className="px-2 mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
                         <Command.Item onSelect={() => runCommand(() => router.push('/dashboard'))} className="palette-item">
-                            <TrendingUp className="h-4 w-4 mr-3 text-slate-400" />
+                            <TrendingUp className="h-4 w-4 mr-3 text-slate-500" />
                             <span>Dashboard Overview</span>
                         </Command.Item>
                         <Command.Item onSelect={() => runCommand(() => router.push('/dashboard/financials'))} className="palette-item">
-                            <DollarSign className="h-4 w-4 mr-3 text-slate-400" />
+                            <DollarSign className="h-4 w-4 mr-3 text-slate-500" />
                             <span>Financial Intelligence</span>
                         </Command.Item>
                         <Command.Item onSelect={() => runCommand(() => router.push('/dashboard/guide'))} className="palette-item">
-                            <BookOpen className="h-4 w-4 mr-3 text-slate-400" />
+                            <BookOpen className="h-4 w-4 mr-3 text-slate-500" />
                             <span>System Manual</span>
                         </Command.Item>
                     </Command.Group>
 
                     {/* PRODUCT DRILL-DOWN */}
-                    <Command.Group heading="Inventory Items" className="px-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    <Command.Group heading="Inventory Items" className="px-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
                         {products.map((p) => (
                             <Command.Item
                                 key={p.id}
@@ -104,7 +104,7 @@ export default function CommandPalette() {
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="font-bold text-slate-900 text-sm">{p.name}</span>
-                                    <span className="text-[10px] font-mono text-slate-400 uppercase font-bold tracking-tighter">
+                                    <span className="text-[10px] font-mono text-slate-500 uppercase font-bold tracking-tighter">
                                         {p.sku} • {p.category || 'General'}
                                     </span>
                                 </div>
@@ -114,7 +114,7 @@ export default function CommandPalette() {
                 </Command.List>
 
                 {/* Footer Insight */}
-                <div className="bg-slate-50/80 px-4 py-2 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                <div className="bg-slate-50/80 px-4 py-2 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                     <span>Vertex Search Engine</span>
                     <div className="flex gap-2">
                         <span>↑↓ to navigate</span>

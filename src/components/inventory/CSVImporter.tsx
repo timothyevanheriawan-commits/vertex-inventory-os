@@ -101,7 +101,7 @@ export default function CSVImporter() {
                     </div>
                     <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest">Bulk Import Products</h3>
                     <p className="mt-1 text-xs text-slate-500">Click to upload or drag and drop your .CSV file</p>
-                    <div className="mt-6 flex justify-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+                    <div className="mt-6 flex justify-center gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
                         <span>Required: SKU, Name, Cost</span>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ export default function CSVImporter() {
                             </div>
                             <div>
                                 <h3 className="text-sm font-bold text-slate-900 uppercase">Review Import Data</h3>
-                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                                     {data.length} Rows Detected • {data.filter(r => r.errors.length > 0).length} Errors
                                 </p>
                             </div>
@@ -142,11 +142,11 @@ export default function CSVImporter() {
                         <table className="w-full text-left text-xs border-collapse">
                             <thead className="bg-slate-50/80 text-slate-500 border-b border-slate-200">
                                 <tr>
-                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[9px]">Status</th>
-                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[9px]">SKU</th>
-                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[9px]">Name</th>
-                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[9px] text-right">Cost</th>
-                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[9px]">Issues</th>
+                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[10px]">Status</th>
+                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[10px]">SKU</th>
+                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[10px]">Name</th>
+                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[10px] text-right">Cost</th>
+                                    <th className="px-4 py-2 font-black uppercase tracking-widest text-[10px]">Issues</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
@@ -164,11 +164,11 @@ export default function CSVImporter() {
                                         <td className="px-4 py-2 text-right font-mono font-bold">${row.unit_cost.toFixed(2)}</td>
                                         <td className="px-4 py-2">
                                             {row.errors.length > 0 ? (
-                                                <span className="text-[9px] font-black text-rose-600 uppercase tracking-tighter">
+                                                <span className="text-[10px] font-black text-rose-600 uppercase tracking-tighter">
                                                     {row.errors.join(", ")}
                                                 </span>
                                             ) : (
-                                                <span className="text-[9px] font-bold text-emerald-600 uppercase">Ready</span>
+                                                <span className="text-[10px] font-bold text-emerald-600 uppercase">Ready</span>
                                             )}
                                         </td>
                                     </tr>

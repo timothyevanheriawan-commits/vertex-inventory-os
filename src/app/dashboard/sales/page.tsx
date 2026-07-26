@@ -1,4 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
+import { getVerifiedUser } from '@/utils/supabase/verified-user'
 import RecordSaleModal from '@/components/sales/RecordSaleModal'
 import SalesList from '@/components/sales/SalesList'
 import { TrendingUp, BarChart3, TrendingDown, Minus, ShoppingCart, ChevronRight } from 'lucide-react'
@@ -19,10 +21,14 @@ interface SaleItem {
 export default async function SalesPage() {
     const supabase = await createClient()
 
+    const user = await getVerifiedUser()
+    if (!user) redirect('/login')
+
     // 1. Fetch Sales
     const { data: sales } = await supabase
         .from('sales')
         .select('id, quantity, sale_date, products (name, sku, category)')
+        .eq('user_id', user.id)
         .order('sale_date', { ascending: false })
         .limit(100) as unknown as { data: SaleItem[] }
 
@@ -30,6 +36,7 @@ export default async function SalesPage() {
     const { data: products } = await supabase
         .from('products')
         .select('id, name, sku, stock_level')
+        .eq('user_id', user.id)
         .order('name')
 
     // ---------------------------------------------------------
@@ -67,8 +74,6 @@ export default async function SalesPage() {
             return acc;
         }, {} as Record<string, number>);
 
-        <SalesList sales={salesData as unknown as SaleItem[]} />
-
         mostAffectedCategory = Object.entries(catStats)
             .sort((a, b) => b[1] - a[1])[0]?.[0] || "General items"
 
@@ -97,7 +102,7 @@ export default async function SalesPage() {
             {/* BREADCRUMB + HEADER */}
             <div className="space-y-3">
                 <nav className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest">
-                    <Link href="/dashboard" className="text-slate-400 hover:text-indigo-600 transition-colors">
+                    <Link href="/dashboard" className="text-slate-500 hover:text-indigo-600 transition-colors">
                         Dashboard
                     </Link>
                     <ChevronRight className="h-3 w-3 text-slate-300" />
@@ -113,7 +118,7 @@ export default async function SalesPage() {
                             <h1 className="text-xl font-bold tracking-tight text-slate-900">
                                 Sales Intelligence
                             </h1>
-                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                                 {salesData.length} Transactions
                             </p>
                         </div>
@@ -130,7 +135,7 @@ export default async function SalesPage() {
                         <BarChart3 className="h-4 w-4 text-indigo-600" />
                     </div>
                     <div>
-                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total Volume</p>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Total Volume</p>
                         <p className="text-lg font-mono font-bold text-slate-900 tabular-nums">{totalVolume}</p>
                     </div>
                 </div>
@@ -141,7 +146,7 @@ export default async function SalesPage() {
                         <ShoppingCart className="h-4 w-4 text-indigo-600" />
                     </div>
                     <div>
-                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Daily Velocity</p>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Daily Velocity</p>
                         <p className="text-lg font-mono font-bold text-slate-900 tabular-nums">{avgDailyVolume}</p>
                     </div>
                 </div>
@@ -164,8 +169,8 @@ export default async function SalesPage() {
                     </div>
                     <div>
                         <p className={cn(
-                            "text-[9px] font-bold uppercase tracking-widest",
-                            trendDirection === 'up' ? "text-emerald-700/60" : trendDirection === 'down' ? "text-rose-700/60" : "text-slate-400"
+                            "text-[10px] font-bold uppercase tracking-widest",
+                            trendDirection === 'up' ? "text-emerald-700/60" : trendDirection === 'down' ? "text-rose-700/60" : "text-slate-500"
                         )}>
                             {trendConfig.label} {trendDirection !== 'neutral' && percentageLabel}
                         </p>
@@ -184,7 +189,7 @@ export default async function SalesPage() {
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
                     <h2 className="text-sm font-bold uppercase tracking-widest text-slate-500">Transaction Log</h2>
-                    <span className="text-[10px] font-mono font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded">LAST 100</span>
+                    <span className="text-[10px] font-mono font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded">LAST 100</span>
                 </div>
                 <SalesList sales={salesData} />
             </div>

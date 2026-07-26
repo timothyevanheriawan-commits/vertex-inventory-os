@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     default: "Vertex | Inventory Intelligence OS",
   },
   description: "Operational intelligence and forecasting for modern retailers.",
-  metadataBase: new URL("http://localhost:3000"), // Update this when you deploy
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   icons: {
     icon: "/icon.svg",      // The logo for browser tabs
     shortcut: "/icon.svg",  // For bookmarks

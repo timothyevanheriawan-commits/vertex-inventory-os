@@ -30,7 +30,7 @@ export default function Sidebar() {
             if (user) setUserEmail(user.email || "No Email");
         }
         getUser();
-    }, []);
+    }, [supabase.auth]);
 
     const handleSignOut = async () => {
         // 1. Clear the Supabase session

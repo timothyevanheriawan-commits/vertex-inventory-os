@@ -51,7 +51,7 @@ export default function SettingsForm({ initialSettings }: { initialSettings: Use
                             defaultValue={initialSettings?.lead_time_days ?? 5}
                             className="w-full rounded-lg border border-slate-200 bg-white p-2.5 font-mono font-bold text-lg text-slate-900 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"
                         />
-                        <span className="absolute right-3 top-3.5 text-[10px] font-black text-slate-400 pointer-events-none uppercase">DAYS</span>
+                        <span className="absolute right-3 top-3.5 text-[10px] font-black text-slate-500 pointer-events-none uppercase">DAYS</span>
                     </div>
                 </div>
 

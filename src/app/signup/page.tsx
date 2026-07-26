@@ -49,7 +49,7 @@ export default async function SignupPage({
                 </div>
 
                 {/* Footer */}
-                <div className="relative z-10 text-xs text-slate-500 font-medium">
+                <div className="relative z-10 text-xs text-slate-400 font-medium">
                     © 2026 Vertex Intelligence OS
                 </div>
             </div>
@@ -88,7 +88,7 @@ export default async function SignupPage({
                                 type="email"
                                 placeholder="name@company.com"
                                 required
-                                className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-medium"
+                                className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-medium"
                             />
                         </div>
 
@@ -101,11 +101,11 @@ export default async function SignupPage({
                                 type="password"
                                 placeholder="Create a strong password"
                                 required
-                                minLength={6}
-                                className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-medium"
+                                minLength={8}
+                                className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-medium"
                             />
-                            <p className="text-[10px] text-slate-400 font-medium">
-                                Must be at least 6 characters long.
+                            <p className="text-[10px] text-slate-500 font-medium">
+                                Must be at least 8 characters long.
                             </p>
                         </div>
 

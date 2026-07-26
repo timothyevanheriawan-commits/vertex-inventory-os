@@ -60,7 +60,7 @@ export default function CategoryDistribution({ items }: { items: Item[] }) {
                 </div>
                 <div>
                     <h3 className="text-xs font-black text-slate-900 uppercase tracking-widest">Category Split</h3>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                         <span className="font-mono font-bold text-slate-600">
                             {totalStock.toLocaleString('en-US')}
                         </span> TOTAL UNITS

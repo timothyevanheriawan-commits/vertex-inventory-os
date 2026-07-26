@@ -25,7 +25,7 @@ export default function StatCard({
     const iconStyles = {
         default: "bg-indigo-50 text-indigo-600 border-indigo-100",
         critical: "bg-rose-50 text-rose-600 border-rose-100",
-        warning: "bg-amber-50 text-amber-600 border-amber-100"
+        warning: "bg-amber-50 text-amber-700 border-amber-100"
     }
 
     const StatusIcon = color === 'critical' ? AlertCircle : color === 'warning' ? AlertCircle : Icon
@@ -41,7 +41,7 @@ export default function StatCard({
         )}>
             {/* Header: Title + Icon */}
             <div className="flex items-center justify-between mb-2">
-                <p className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-400">
+                <p className="text-[10px] font-black uppercase tracking-[0.12em] text-slate-500">
                     {title}
                 </p>
                 <div className={cn(
@@ -56,7 +56,7 @@ export default function StatCard({
             <p className={cn(
                 "text-2xl font-mono font-bold tracking-tight tabular-nums leading-none mb-2",
                 color === 'critical' ? "text-rose-600" :
-                    color === 'warning' ? "text-amber-600" :
+                    color === 'warning' ? "text-amber-700" :
                         "text-slate-900"
             )}>
                 {value}
@@ -67,7 +67,7 @@ export default function StatCard({
                 <div className="mt-auto pt-2 border-t border-slate-100 space-y-1.5">
                     {description && (
                         <p className={cn(
-                            "text-[9px] font-bold uppercase tracking-wide leading-tight",
+                            "text-[10px] font-bold uppercase tracking-wide leading-tight",
                             color === 'critical' ? "text-rose-500" :
                                 color === 'warning' ? "text-amber-500" :
                                     "text-slate-500"
@@ -77,7 +77,7 @@ export default function StatCard({
                     )}
                     {trend && (
                         <span className={cn(
-                            "inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-tight border",
+                            "inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-tight border",
                             trend.direction === 'up'
                                 ? "text-emerald-700 bg-emerald-50 border-emerald-200"
                                 : trend.direction === 'down'

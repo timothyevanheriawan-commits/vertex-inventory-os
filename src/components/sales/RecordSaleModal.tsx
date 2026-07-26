@@ -67,7 +67,7 @@ export default function RecordSaleModal({ products }: { products: SimpleProduct[
                                 onClick={() => setIsOpen(false)}
                                 aria-label="Close modal"
                                 title="Close"
-                                className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                                className="text-slate-500 hover:text-slate-600 cursor-pointer"
                             >
                                 <X className="h-5 w-5" />
                             </button>
@@ -79,7 +79,7 @@ export default function RecordSaleModal({ products }: { products: SimpleProduct[
                                     Search Product
                                 </label>
                                 <div className="relative">
-                                    <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                    <Search className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
                                     <input
                                         id="product_search"
                                         type="text"

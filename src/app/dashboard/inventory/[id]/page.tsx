@@ -1,4 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
+import { getVerifiedUser } from '@/utils/supabase/verified-user'
 import Link from 'next/link'
 import { ArrowLeft, AlertTriangle, CheckCircle, Clock, ChevronRight } from 'lucide-react'
 import { cn } from '@/app/lib/utils'
@@ -9,10 +11,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     const { id } = await params
     const supabase = await createClient()
 
+    const user = await getVerifiedUser()
+    if (!user) redirect('/login')
+
+    // Ownership filter prevents one tenant from viewing another tenant's
+    // product by guessing/enumerating its UUID (IDOR).
     const { data: product } = await supabase
         .from('inventory_insights')
         .select('*')
         .eq('product_id', id)
+        .eq('user_id', user.id)
         .single()
 
     if (!product) {
@@ -73,14 +81,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <nav className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest">
                 <Link
                     href="/dashboard"
-                    className="text-slate-400 hover:text-indigo-600 transition-colors"
+                    className="text-slate-500 hover:text-indigo-600 transition-colors"
                 >
                     Dashboard
                 </Link>
                 <ChevronRight className="h-3 w-3 text-slate-300" />
                 <Link
                     href="/dashboard/inventory"
-                    className="text-slate-400 hover:text-indigo-600 transition-colors"
+                    className="text-slate-500 hover:text-indigo-600 transition-colors"
                 >
                     Inventory
                 </Link>
@@ -94,7 +102,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     <div className="flex items-center gap-3">
                         <Link
                             href="/dashboard/inventory"
-                            className="p-1.5 rounded-lg border border-slate-200 text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-all"
+                            className="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:text-slate-600 hover:bg-slate-50 transition-all"
                         >
                             <ArrowLeft className="h-4 w-4" />
                         </Link>
@@ -102,7 +110,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             {product.name}
                         </h1>
                     </div>
-                    <p className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider pl-10">
+                    <p className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider pl-10">
                         {product.sku} • {product.category || 'GENERAL'}
                     </p>
                 </div>
@@ -132,7 +140,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 />
                 {/* NEW: Audit History Section */}
                 <div className="space-y-4">
-                    <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Activity History</h2>
+                    <h2 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Activity History</h2>
                     <InventoryHistory logs={logs || []} />
                 </div>
             </div>        </div>

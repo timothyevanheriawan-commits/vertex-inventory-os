@@ -1,4 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
+import { getVerifiedUser } from '@/utils/supabase/verified-user'
 import { AlertTriangle, TrendingUp, Activity, RefreshCw, Plus, ShoppingCart, CheckCircle2, Clock } from 'lucide-react'
 import StatCard from '@/components/dashboard/StatCard'
 import InsightsTable from '@/components/dashboard/InsightsTable'
@@ -11,8 +13,14 @@ import { PackagePlus, FileUp } from 'lucide-react'
 export default async function DashboardPage() {
     const supabase = await createClient()
 
+    const user = await getVerifiedUser()
+    if (!user) redirect('/login')
+
     // 1. Fetch Inventory Snapshot
-    const { data: insights } = await supabase.from('inventory_insights').select('*')
+    const { data: insights } = await supabase
+        .from('inventory_insights')
+        .select('*')
+        .eq('user_id', user.id)
     const items = insights || []
 
     // 2. Fetch Sales Data (Last 30 Days for Velocity)
@@ -22,6 +30,7 @@ export default async function DashboardPage() {
     const { data: salesData } = await supabase
         .from('sales')
         .select('sale_date, quantity')
+        .eq('user_id', user.id)
         .gte('sale_date', thirtyDaysAgo)
         .order('sale_date', { ascending: true })
 
@@ -155,7 +164,7 @@ export default async function DashboardPage() {
                             <h2 className="text-xs font-bold uppercase tracking-widest text-slate-600">
                                 Demand Baseline
                             </h2>
-                            <span className="text-[10px] text-slate-400 font-mono font-bold uppercase tracking-widest bg-slate-50 px-2 py-1 rounded border border-slate-100">
+                            <span className="text-[10px] text-slate-500 font-mono font-bold uppercase tracking-widest bg-slate-50 px-2 py-1 rounded border border-slate-100">
                                 Last 14 days
                             </span>
                         </div>
@@ -180,7 +189,7 @@ export default async function DashboardPage() {
                                 href="/dashboard/sales"
                                 className="group flex items-center justify-center gap-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-600 uppercase tracking-widest shadow-sm transition-all duration-200 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200 active:scale-[0.98]"
                             >
-                                <ShoppingCart className="h-4 w-4 text-slate-400 group-hover:text-indigo-500 transition-colors" />
+                                <ShoppingCart className="h-4 w-4 text-slate-500 group-hover:text-indigo-500 transition-colors" />
                                 Log Transaction
                             </Link>
                             <Link
@@ -212,7 +221,7 @@ export default async function DashboardPage() {
                             </div>
                             <div className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors group cursor-default">
                                 <div className="flex items-center gap-2.5">
-                                    <div className="p-1.5 rounded-md bg-amber-50 text-amber-600 border border-amber-100 group-hover:border-amber-200 transition-colors">
+                                    <div className="p-1.5 rounded-md bg-amber-50 text-amber-700 border border-amber-100 group-hover:border-amber-200 transition-colors">
                                         <Clock className="h-3.5 w-3.5" />
                                     </div>
                                     <span className="text-xs font-bold text-slate-600 uppercase tracking-wide">Watchlist</span>

@@ -36,7 +36,7 @@ export default function ProductAnalysisDashboard({ product, sales }: { product: 
             <div className="md:col-span-2 space-y-8">
                 <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-6 shadow-sm">
                     <div className="flex justify-between items-start mb-6">
-                        <h3 className="font-black text-[10px] uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
+                        <h3 className="font-black text-[10px] uppercase tracking-[0.2em] text-slate-500 flex items-center gap-2">
                             <Activity className="h-4 w-4 text-indigo-500" />
                             Intelligence Summary
                         </h3>
@@ -58,15 +58,15 @@ export default function ProductAnalysisDashboard({ product, sales }: { product: 
 
                     <div className="grid grid-cols-3 gap-4 border-t border-slate-200 pt-6">
                         <div>
-                            <p className="text-[9px] text-slate-400 uppercase font-black tracking-widest">On Hand</p>
+                            <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest">On Hand</p>
                             <p className="text-xl font-mono font-black text-slate-900 tabular-nums">{product.stock_level}</p>
                         </div>
                         <div className="text-center">
-                            <p className="text-[9px] text-slate-400 uppercase font-black tracking-widest">Burn Rate</p>
+                            <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Burn Rate</p>
                             <p className="text-xl font-mono font-black text-slate-900 tabular-nums">{simulatedBurn.toFixed(2)}</p>
                         </div>
                         <div className="text-right">
-                            <p className="text-[9px] text-slate-400 uppercase font-black tracking-widest">Remaining</p>
+                            <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Remaining</p>
                             <p className={cn("text-xl font-mono font-black tabular-nums", isRunwayDangerous ? "text-rose-600" : "text-slate-900")}>
                                 {simulatedDays}d
                             </p>
@@ -85,7 +85,7 @@ export default function ProductAnalysisDashboard({ product, sales }: { product: 
                 />
 
                 <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <h3 className="font-black text-[10px] text-slate-400 uppercase tracking-[0.2em] mb-6">Operational Context</h3>
+                    <h3 className="font-black text-[10px] text-slate-500 uppercase tracking-[0.2em] mb-6">Operational Context</h3>
 
                     {/* FIX: Corrected <dl> structure for A11y */}
                     <dl className="space-y-4">
@@ -98,8 +98,8 @@ export default function ProductAnalysisDashboard({ product, sales }: { product: 
                             <dd className="text-sm font-mono font-black text-slate-900">{product.min_stock_threshold} Units</dd>
                         </div>
                         <div className="pt-4 border-t border-slate-50 flex justify-between items-center text-xs font-bold">
-                            <dt className="text-slate-400 uppercase tracking-tighter">Last Restock</dt>
-                            <dd className="text-slate-400 font-mono italic">Jan 12, 2026</dd>
+                            <dt className="text-slate-500 uppercase tracking-tighter">Last Restock</dt>
+                            <dd className="text-slate-500 font-mono italic">Jan 12, 2026</dd>
                         </div>
                     </dl>
                 </div>
